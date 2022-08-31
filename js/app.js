@@ -59,9 +59,10 @@ let displayProduct = async () => {
 						}
 						</h2>
 						
-						<label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${
-							product.description
-						}', '${product.image}')">Show Details</label>
+						<label for="my-modal-3" onclick="loadDetails(${
+							product.id
+						})" class="btn modal-button w-2/4 mx-auto">Show Details
+</label> 
 						
 					</div>
 						
@@ -88,12 +89,26 @@ let toggleLoader = (isLoading) => {
 	}
 };
 
-const openModal = (description, image) => {
-	console.log(image);
+const loadDetails = (id) => {
+	let url = `https://fakestoreapi.com/products/${id}`;
+	fetch(url)
+		.then((res) => res.json())
+		.then((data) => openModal(data));
+};
+loadDetails();
+
+const openModal = (details) => {
+	console.log(details);
 	const modal = document.getElementById('modal-body');
 	modal.textContent = '';
 
-	modal.innerHTML = `<p>${description}</p>
-        <img src="${image}"/>
+	modal.innerHTML = `<p>${details.description}</p>
+        <img src="${details.image}"/>
     `;
 };
+
+{
+	/* <label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${product.description}', '${product.image}')">Show Details</label>
+						
+						<label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${product.description}', '${product.image}')">Show Details</label> */
+}
