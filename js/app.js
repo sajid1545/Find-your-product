@@ -22,7 +22,6 @@ let setList = async () => {
 			menu.appendChild(li);
 		}
 	});
-	console.log(products);
 };
 setList();
 
@@ -59,8 +58,11 @@ let displayProduct = async () => {
 							product.title.length > 20 ? product.title.slice(0, 20) + '...' : `${product.title}`
 						}
 						</h2>
-						<label for="my-modal" class="btn modal-button">Show Details</label>
-
+						
+						<label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${
+							product.description
+						}', '${product.image}')">Show Details</label>
+						
 					</div>
 						
 				</div>
@@ -86,4 +88,12 @@ let toggleLoader = (isLoading) => {
 	}
 };
 
-let productDetails = () => {};
+const openModal = (description, image) => {
+	console.log(image);
+	const modal = document.getElementById('modal-body');
+	modal.textContent = '';
+
+	modal.innerHTML = `<p>${description}</p>
+        <img src="${image}"/>
+    `;
+};
