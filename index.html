@@ -17,8 +17,67 @@
 
 <body>
     <header>
-        <h1 class="text-5xl text-center font-mono font-bold mt-5">Choose Your Desired Product</h1>
+        <h1 class="text-4xl text-center font-mono font-bold mt-5">Choose Your Desired Product</h1>
+
+        <!-- Input Section -->
+        <section>
+            <div class="form-control w-full mx-auto mt-10 max-w-xs">
+                <label class="label">
+                    <span class="label-text">Search Your Product</span>
+                    <span class="label-text-alt">Press
+                        <kbd class="kbd kbd-sm">Enter</kbd>
+                    </span>
+                </label>
+                <input id="search-field" type="text" placeholder="Type here"
+                    class="input input-bordered w-full max-w-xs" />
+
+            </div>
+        </section>
     </header>
+
+    <main>
+
+        <!-- Spinner -->
+        <div id="spinner" class="w-4/5 mx-auto my-5 hidden">
+            <progress class="progress progress-primary "></progress>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="hidden">
+            <p class="text-center mt-5 text-red-500 text-4xl">Products Not Found</p>
+        </div>
+
+
+
+        <section class="flex space-x-4">
+            <!-- Menu -->
+
+            <div class="flex-none">
+                <ul id="category-list" class="menu w-56 bg-secondary text-secondary-content p-2 rounded-box my-10">
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                    <li><a>Item 3</a></li>
+                </ul>
+            </div>
+
+            <!-- Products Container -->
+            <div class="grid grid-cols-4 gap-5 mt-5 ">
+
+                <div class="card card-compact  bg-base-100 shadow-xl">
+                    <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Shoes!</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
 </body>
 
 </html>
