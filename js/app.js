@@ -25,16 +25,18 @@ let setList = async () => {
 };
 setList();
 
-let displayProducts = async () => {
+document.getElementById('search-field').addEventListener('keypress', async (e) => {
 	let productsContainer = document.getElementById('products-container');
 	productsContainer.innerHTML = '';
 	let products = await loadProducts();
+	let searchValue = document.getElementById('search-field').value;
 
-	products.forEach((product) => {
-		console.log(product);
-		let productDiv = document.createElement('div');
-		// productDiv.classList.add('grid', 'grid-cols-4');
-		productDiv.innerHTML = `
+	let foundProduct = products.filter((product) => product.category.includes(searchValue));
+	if (e.key === 'Enter') {
+		foundProduct.forEach((product) => {
+			let productDiv = document.createElement('div');
+			// productDiv.classList.add('grid', 'grid-cols-4');
+			productDiv.innerHTML = `
         <div class="card card-compact  bg-base-100 shadow-xl">
                     <figure><img src="${product.image}" alt="Shoes" class="h-60 w-full" /></figure>
                     <div class="card-body">
@@ -47,7 +49,7 @@ let displayProducts = async () => {
                         
                 </div>
         `;
-		productsContainer.appendChild(productDiv);
-	});
-};
-displayProducts();
+			productsContainer.appendChild(productDiv);
+		});
+	}
+});
