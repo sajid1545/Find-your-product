@@ -59,6 +59,8 @@ let displayProduct = async () => {
 							product.title.length > 20 ? product.title.slice(0, 20) + '...' : `${product.title}`
 						}
 						</h2>
+						<label for="my-modal" class="btn modal-button">Show Details</label>
+
 					</div>
 						
 				</div>
@@ -83,3 +85,5 @@ let toggleLoader = (isLoading) => {
 		spinner.classList.add('hidden');
 	}
 };
+
+let productDetails = () => {};
