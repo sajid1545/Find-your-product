@@ -22,6 +22,7 @@ let setList = async () => {
 			menu.appendChild(li);
 		}
 	});
+	console.log(products);
 };
 setList();
 
@@ -39,11 +40,14 @@ document.getElementById('search-field').addEventListener('keypress', async (e) =
 
 	if (e.key === 'Enter') {
 		// error
+		toggleLoader(true);
+
 		if (foundProduct.length === 0) {
 			error.classList.remove('hidden');
 		} else {
 			error.classList.add('hidden');
 		}
+		toggleLoader(false);
 
 		// Displaying searched Products
 		if (foundProduct.length) {
@@ -59,7 +63,7 @@ document.getElementById('search-field').addEventListener('keypress', async (e) =
                             <h2 class="card-title">${
 															product.title.length > 20
 																? product.title.slice(0, 20) + '...'
-																: 'Title N/A'
+																: `${product.title}`
 														}
                             </h2>
                         </div>
