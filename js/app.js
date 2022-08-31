@@ -32,24 +32,41 @@ document.getElementById('search-field').addEventListener('keypress', async (e) =
 	let searchValue = document.getElementById('search-field').value;
 
 	let foundProduct = products.filter((product) => product.category.includes(searchValue));
+
 	if (e.key === 'Enter') {
-		foundProduct.forEach((product) => {
-			let productDiv = document.createElement('div');
-			// productDiv.classList.add('grid', 'grid-cols-4');
-			productDiv.innerHTML = `
-        <div class="card card-compact  bg-base-100 shadow-xl">
-                    <figure><img src="${product.image}" alt="Shoes" class="h-60 w-full" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">${
-													product.title.length > 20
-														? product.title.slice(0, 20) + '...'
-														: 'Title N/A'
-												}</h2>
+		// error
+		let error = document.getElementById('error-message');
+		if (foundProduct.length === 0) {
+			error.classList.remove('hidden');
+		} else {
+			error.classList.add('hidden');
+		}
+
+		// Displaying searched Products
+		if (foundProduct.length) {
+			foundProduct.forEach((product) => {
+				let productDiv = document.createElement('div');
+				// productDiv.classList.add('grid', 'grid-cols-4');
+				productDiv.innerHTML = `
+            <div class="card card-compact  bg-base-100 shadow-xl">
+                        <figure><img src="${
+													product.image
+												}" alt="Shoes" class="h-60 w-full" /></figure>
+                        <div class="card-body">
+                            <h2 class="card-title">${
+															product.title.length > 20
+																? product.title.slice(0, 20) + '...'
+																: 'Title N/A'
+														}</h2>
+                        </div>
+                            
                     </div>
-                        
-                </div>
-        `;
-			productsContainer.appendChild(productDiv);
-		});
+            `;
+				productsContainer.appendChild(productDiv);
+			});
+		}
+		// else {
+		// 	error.innerText = 'No products found.';
+		// }
 	}
 });
