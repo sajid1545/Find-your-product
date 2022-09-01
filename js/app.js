@@ -11,15 +11,26 @@ let setList = async () => {
 
 	let menu = document.getElementById('category-list');
 	let products = await loadProducts();
+	console.log(products);
 	products.forEach((product) => {
 		if (list.indexOf(product.category) === -1) {
 			list.push(product.category);
 
+			let a = document.createElement('a');
+
 			let li = document.createElement('li');
+			li.classList.add('list');
 			li.style.padding = '15px';
-			li.innerHTML = `${product.category}`;
+			a.innerHTML = `${product.category}`;
+			li.appendChild(a);
 
 			menu.appendChild(li);
+
+			let anchor = a;
+			// console.log(anchor.innerText);
+			anchor.addEventListener('click', () => {
+				displayProduct();
+			});
 		}
 	});
 };
@@ -62,7 +73,7 @@ let displayProduct = async () => {
 						<label for="my-modal-3" onclick="loadDetails(${
 							product.id
 						})" class="btn modal-button w-2/4 mx-auto">Show Details
-</label> 
+					</label> 
 						
 					</div>
 						
@@ -106,9 +117,3 @@ const openModal = (details) => {
         <img src="${details.image}"/>
     `;
 };
-
-{
-	/* <label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${product.description}', '${product.image}')">Show Details</label>
-						
-						<label for="my-modal-3" class="btn btn-primary modal-button" onclick="openModal('${product.description}', '${product.image}')">Show Details</label> */
-}
