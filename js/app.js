@@ -19,43 +19,45 @@ let setList = async () => {
 			let a = document.createElement('a');
 
 			let li = document.createElement('li');
-			li.classList.add('list');
 			li.style.padding = '15px';
 			a.innerHTML = `${product.category}`;
 			li.appendChild(a);
 
 			menu.appendChild(li);
-
+			console.log(list);
 			let anchor = a;
 			// console.log(anchor.innerText);
 			anchor.addEventListener('click', () => {
-				if (anchor.innerText === product.category) {
-					let productsContainer = document.getElementById('products-container');
-					productsContainer.innerHTML = '';
-					// displayProduct();
-					let productDiv = document.createElement('div');
-					// productDiv.classList.add('grid', 'grid-cols-4');
-					productDiv.innerHTML = `
-		<div class="card card-compact  bg-base-100 shadow-xl">
-					<figure><img src="${product.image}" alt="Shoes" class="h-60 w-full" /></figure>
-					<div class="card-body">
-						<h2 class="card-title">${
-							product.title.length > 20 ? product.title.slice(0, 20) + '...' : `${product.title}`
-						}
-						</h2>
-						
-						<label for="my-modal-3" onclick="loadDetails(${
-							product.id
-						})" class="btn modal-button w-2/4 mx-auto">Show Details
-					</label> 
-						
-					</div>
-						
-				</div>
-		`;
-					productsContainer.appendChild(productDiv);
+				for (li of list) {
+					if (li === product.category) {
+						let productsContainer = document.getElementById('products-container');
+						productsContainer.innerHTML = '';
+						// displayProduct();
+						let productDiv = document.createElement('div');
+						// productDiv.classList.add('grid', 'grid-cols-4');
+						productDiv.innerHTML = `
+				<div class="card card-compact  bg-base-100 shadow-xl">
+							<figure><img src="${product.image}" alt="Shoes" class="h-60 w-full" /></figure>
+							<div class="card-body">
+								<h2 class="card-title">${
+									product.title.length > 20
+										? product.title.slice(0, 20) + '...'
+										: `${product.title}`
+								}
+								</h2>
+
+								<label for="my-modal-3" onclick="loadDetails(${
+									product.id
+								})" class="btn modal-button w-2/4 mx-auto">Show Details
+							</label>
+
+							</div>
+
+						</div>
+				`;
+						productsContainer.appendChild(productDiv);
+					}
 				}
-				//
 			});
 		}
 	});
